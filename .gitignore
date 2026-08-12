@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+
+# Generated data
+output_json/
+embedding.joblib
+response.txt
+
+# Media
+videos/
+audios/
+
+# Optional
+unused/
