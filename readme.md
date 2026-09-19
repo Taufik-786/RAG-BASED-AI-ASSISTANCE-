@@ -88,7 +88,7 @@ Generated Response
 
 ## Demonstration
 
-streamlit =  https://qfxarsrwu4mganqfxw4s6m.streamlit.app/
+streamlit =  https://courserag-a-retrieval-augmented-course-intelligence-assistant.streamlit.app/
 
 The following example demonstrates how the system retrieves relevant lecture content and generates grounded responses.
 
