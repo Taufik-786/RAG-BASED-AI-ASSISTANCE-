@@ -140,6 +140,7 @@ RAG-BASED-AI-ASSISTANCE/
 └── images/
     └── system_architecture.svg
 
+```
 
 ## Implementation Pipeline
 
