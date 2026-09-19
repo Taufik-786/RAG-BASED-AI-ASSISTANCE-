@@ -1,6 +1,7 @@
 # Python
 __pycache__/
 *.pyc
+*architecture(1).png
 
 # Generated data
 output_json/
