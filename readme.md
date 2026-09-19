@@ -182,3 +182,90 @@ This project serves as a foundation for exploring more advanced retrieval and qu
 - Multilingual question answering over lecture recordings.
 - Quantitative evaluation using retrieval metrics such as Recall@K and Mean Reciprocal Rank (MRR).
 - Investigation of hallucination reduction techniques in Retrieval-Augmented Generation systems.
+
+
+
+# Modifications for Demonstration and Public Accessibility
+
+The original project was designed as a fully local Retrieval-Augmented Generation (RAG) system intended for personal experimentation and offline usage. While this architecture provided complete local control, it required users to install and run multiple services, making demonstration and evaluation difficult for external users.
+
+To enable public demonstration without altering the core RAG workflow, a deployment-oriented version was created. These modifications were introduced solely to improve accessibility, reproducibility, and ease of evaluation for recruiters, researchers, and learners.
+
+## Original Research Pipeline
+
+Lecture Videos
+→ FFmpeg Audio Extraction
+→ Whisper Large-v2 Transcription
+→ BGE-M3 Embeddings (Ollama)
+→ Embedding Storage (Joblib)
+→ Query Embedding (BGE-M3)
+→ Cosine Similarity Retrieval
+→ Llama 3.2 (Ollama)
+→ Grounded Answer
+
+## Demonstration Pipeline
+
+Lecture Videos
+→ FFmpeg Audio Extraction
+→ Whisper Large-v2 Transcription
+→ BGE Small Embeddings (Sentence Transformers)
+→ Embedding Storage (Joblib)
+→ Query Embedding
+→ Cosine Similarity Retrieval
+→ Gemini Flash API
+→ Streamlit Interface
+→ Grounded Answer
+
+## Modifications Introduced
+
+| Component | Original Implementation | Demonstration Version |
+|------------|------------------------|----------------------|
+| Embedding Backend | BGE-M3 via Ollama API | BAAI/bge-small-en-v1.5 |
+| Answer Generation | Llama 3.2 via Ollama | Gemini Flash API |
+| User Interface | Command-Line Interface | Streamlit Web Application |
+| Accessibility | Local Machine Only | Public Cloud Deployment |
+| Demonstration Method | Terminal-Based Interaction | Interactive Web Interface |
+
+## Purpose of These Changes
+
+These modifications were introduced exclusively for deployment and demonstration purposes. The objective was to make the project accessible to anyone through a web browser without requiring:
+
+- Local Ollama installation
+- Large language model downloads
+- Dedicated GPU resources
+- Manual environment configuration
+
+The fundamental Retrieval-Augmented Generation workflow remains unchanged. The project still follows the same process of:
+
+1. Converting lecture videos into transcripts.
+2. Generating semantic embeddings.
+3. Retrieving relevant chunks using vector similarity search.
+4. Providing grounded responses based on retrieved content.
+5. Referencing lecture timestamps to improve explainability.
+
+## Preservation of Original Design
+
+The original implementation files have been preserved for reproducibility, experimentation, and comparison with the deployment-oriented version.
+
+### Original Research Components
+
+- `video_to_mp3.py` – Video preprocessing and audio extraction
+- `mp3_to_json.py` – Whisper-based transcription and timestamped chunk generation
+- `preprocess_json.py` – Original embedding generation pipeline
+- `process_query.py` – Original command-line RAG workflow using local retrieval and inference
+
+These files represent the initial locally executed implementation and are retained to document the project's development process.
+
+### Deployment Components
+
+To make the system publicly accessible without requiring local model hosting, a separate deployment layer was introduced:
+
+- `app.py` – Streamlit-based web application used for the live demonstration
+- Gemini API integration for cloud-accessible answer generation
+- Lightweight embedding model for efficient deployment and hosting
+
+The deployed application operates through `app.py`, while the original command-line implementation (`process_query.py`) is preserved as a reference implementation and is not required for using the live demo.
+
+## Summary of Architectural Intent
+
+The modifications were introduced solely to improve accessibility and demonstration capabilities. The original RAG architecture and retrieval methodology remain unchanged, while the deployment layer enables anyone to interact with the system through a web browser without installing Ollama, downloading local language models, or configuring a dedicated inference environment.

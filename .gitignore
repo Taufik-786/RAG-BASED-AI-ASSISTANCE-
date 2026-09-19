@@ -5,7 +5,6 @@ __pycache__/
 
 # Generated data
 output_json/
-embedding.joblib
 response.txt
 
 # Media
