@@ -12,7 +12,27 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("🎓 RAG Course Assistant")
+st.title("🎓 CourseRAG: Web Development Learning Assistant")
+
+st.markdown("""
+### 📚 Web Development Course Knowledge Base
+
+This assistant has been trained on transcripts from a **10-video Web Development course**.
+
+You can ask questions about:
+
+- HTML
+- CSS
+- JavaScript
+- Forms
+- Tables
+- Images
+- Website Structure
+- VS Code Setup
+- React Basics
+- Web Development Fundamentals
+
+""")
 st.write("Ask questions about your course content.")
 
 df = joblib.load("embedding.joblib")
@@ -24,7 +44,9 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 model = genai.GenerativeModel("gemini-3.6-flash")
 
-query = st.text_input("Ask a question about the course")
+query = st.text_input(
+    "🔍 Ask a question about the Web Development course"
+)
 
 def create_embedding(text_list):
     return embedding_model.encode(
@@ -71,9 +93,9 @@ Now answer the question.
 
     response = inference(prompt)
 
-    st.subheader("Answer")
+    st.subheader("📖 Course Assistant Response")
     st.write(response)
     
-    st.subheader("Retrieved Context")
+    st.subheader("🎯 Retrieved Course Chunks")
 
     st.dataframe(new_df[["number", "title", "start", "end", "text"]])
